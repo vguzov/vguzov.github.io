@@ -671,5 +671,8 @@ List of files licenced under MIT License above:
 ├── ./purgecss.config.js
 ├── ./requirements.txt
 ├── ./robots.txt
+├── ./.pre-commit-config.yaml                                                                                                                                                                               
+├── ./.prettierignore                                                                                                                                                                                       
+├── ./.prettierrc
 
 ```
