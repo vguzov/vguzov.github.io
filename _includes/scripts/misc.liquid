@@ -41,3 +41,28 @@
 <script defer src="{{ '/assets/js/jupyter_new_tab.js' | relative_url | bust_file_cache }}"></script>
 
 {% assign site.test-library.url = site.test-library.url | append: 'teste' %}
+
+
+<!-- Preview video start -->
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const rows = document.querySelectorAll('.row');
+           rows.forEach(container => {
+                const video = container.querySelector('.preview_video');
+                const thumbnail = container.querySelector('.thumbnail');
+
+                container.addEventListener('mouseenter', function () {
+                    thumbnail.style.display = 'none';
+                    video.style.display = 'block';
+                    video.play();
+                });
+
+                container.addEventListener('mouseleave', function () {
+                    video.pause();
+                    video.currentTime = 0;
+                    video.style.display = 'none';
+                    thumbnail.style.display = 'block';
+                });
+            });
+        });
+</script>

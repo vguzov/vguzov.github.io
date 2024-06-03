@@ -1,5 +1,6 @@
 {% assign img_path = include.path | remove: '.jpg' | remove: '.jpeg' | remove: '.png' | remove: '.tiff' | remove: '.gif' %}
-
+{% assign video_path = include.video_path | remove: '.mp4' | remove: '.mov' | remove: '.webm' %}
+<div class="thumbnail-container">
 <figure
   {% if include.slot %}
     slot="{{ include.slot }}"
@@ -26,7 +27,9 @@
     <img
       src="{% if include.cache_bust %}{{ include.path | relative_url | bust_file_cache }}{% else %}{{ include.path | relative_url }}{% endif %}"
       {% if include.class %}
-        class="{{ include.class }}"
+        class="{{ include.class }} thumbnail"
+      {% else %}
+        class="thumbnail"
       {% endif %}
       {% if include.width %}
         width="{{ include.width }}"
@@ -70,9 +73,55 @@
       {% endif %}
       onerror="this.onerror=null; $('.responsive-img-srcset').remove();"
     >
+    {% if video_path %}
+      <video muted
+              {% if include.class %}
+        class="{{ include.class }} preview_video"
+        {% else %}
+        class="preview_video"
+
+      {% endif %}
+      {% if include.width %}
+        width="{{ include.width }}"
+      {% else %}
+        width="100%"
+      {% endif %}
+      {% if include.height %}
+        height="{{ include.height }}"
+      {% else %}
+        height="auto"
+      {% endif %}
+      {% if include['min-width'] or include['min-height'] or include['max-width'] or include['max-height'] %}
+        style="
+          {% if include['min-width'] %}
+            min-width: {{ include.min-width }};
+          {% endif %}
+          {% if include['min-height'] %}
+            min-height: {{ include.min-height }};
+          {% endif %}
+          {% if include['max-width'] %}
+            max-width: {{ include.max-width }};
+          {% endif %}
+          {% if include['max-height'] %}
+            max-height: {{ include.max-height }};
+          {% endif %}
+        "
+      {% endif %}
+      {% if include.alt %}
+        alt="{{ include.alt }}"
+      {% endif %}
+      {% if include.title %}
+        title="{{ include.title }}"
+      {% endif %}>
+            <source src="{{ include.video_path | relative_url }}#t=0.001" type="video/mp4" >
+            Your browser does not support the video tag.
+    </video>
+
+    {% endif %}
   </picture>
 
   {% if include.caption %}
     <figcaption class="caption">{{ include.caption }}</figcaption>
   {% endif %}
 </figure>
+</div>
