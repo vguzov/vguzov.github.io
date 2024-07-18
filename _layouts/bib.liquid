@@ -46,10 +46,32 @@
     </div>
   {% endif %}
 
+    {% if entry.website %}
+    {% assign entry_url = entry.website %}
+    {% elsif entry.html %}
+    {% assign entry_url = entry.html %}
+    {% elsif entry.pdf %}
+    {% assign entry_url = entry.pdf %}
+    {% elsif entry.blog %}
+    {% assign entry_url = entry.blog %}
+    {% elsif entry.code %}
+    {% assign entry_url = entry.code %}
+    {% elsif entry.arxiv %}
+    {% assign entry_url = "http://arxiv.org/abs/" | append: entry.arxiv %}
+    {% elsif entry.slides %}
+    {% assign entry_url = entry.slides %}
+    {% endif %}
+
   <!-- Entry bib key -->
   <div id="{{entry.key}}" class="{% if site.enable_publication_thumbnails %}col-sm-8{% else %}col-sm-10{% endif %}">
     <!-- Title -->
-    <div class="title">{{ entry.title }}</div>
+    <div class="title">
+        {% if entry_url %}
+        <a href="{{ entry_url }}">{{ entry.title }}</a>
+        {% else %}
+        {{ entry.title }}
+        {% endif %}
+    </div>
     <!-- Author -->
     <div class="author">
       {% assign author_array_size = entry.author_array | size %}
