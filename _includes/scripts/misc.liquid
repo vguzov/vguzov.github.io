@@ -50,19 +50,20 @@
            rows.forEach(container => {
                 const video = container.querySelector('.preview_video');
                 const thumbnail = container.querySelector('.thumbnail');
-
-                container.addEventListener('mouseenter', function () {
+                if (video) {
+                  container.addEventListener('mouseenter', function() {
                     thumbnail.style.display = 'none';
                     video.style.display = 'block';
                     video.play();
-                });
+                  });
 
-                container.addEventListener('mouseleave', function () {
+                  container.addEventListener('mouseleave', function() {
                     video.pause();
                     video.currentTime = 0;
                     video.style.display = 'none';
                     thumbnail.style.display = 'block';
-                });
+                  });
+                }
             });
         });
 </script>
