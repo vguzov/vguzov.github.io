@@ -32,28 +32,19 @@
                     {% assign entry_path = entry.preview | prepend: '/assets/img/publication_preview/' %}
                     {% if entry.preview_video %}
                         {% assign entry_video_path = entry.preview_video | prepend: '/assets/video/publication_preview/' %}
-                        {%
-                                include figure.liquid
-                                loading="eager"
-                                path=entry_path
-                                video_path=entry_video_path
-                                sizes="200px"
-                                class="preview z-depth-1 rounded"
-                                zoomable=true
-                                alt=entry.preview
-                        %}
                     {% else %}
-                        {%
-                                include figure.liquid
-                                loading="eager"
-                                path=entry_path
-                                sizes="200px"
-                                class="preview z-depth-1 rounded"
-                                zoomable=true
-                                alt=entry.preview
-                        %}
-
+                        {% assign entry_video_path = empty %}
                     {% endif %}
+                    {%
+                            include figure.liquid
+                            loading="eager"
+                            path=entry_path
+                            video_path=entry_video_path
+                            sizes="200px"
+                            class="preview z-depth-1 rounded"
+                            zoomable=true
+                            alt=entry.preview
+                    %}
 
                 {% endif %}
             {% endif %}

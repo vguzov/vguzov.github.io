@@ -1,7 +1,5 @@
 {% assign img_path = include.path | remove: '.jpg' | remove: '.jpeg' | remove: '.png' | remove: '.tiff' | remove: '.gif' %}
-{% if include.video_path %}
-    {% assign video_path = include.video_path | remove: '.mp4' | remove: '.mov' | remove: '.webm' %}
-{% endif %}
+{% assign video_path = include.video_path | remove: '.mp4' | remove: '.mov' | remove: '.webm' %}
 <div class="thumbnail-container">
     <figure
             {% if include.slot %}
@@ -75,7 +73,7 @@
                     {% endif %}
                     onerror="this.onerror=null; $('.responsive-img-srcset').remove();"
             >
-            {% if video_path %}
+            {% if video_path != empty %}
                 <video muted
                         {% if include.class %}
                             class="{{ include.class }} preview_video"
